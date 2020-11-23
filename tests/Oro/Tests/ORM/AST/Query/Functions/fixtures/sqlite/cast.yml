@@ -1,0 +1,14 @@
+#STRING
+- functions:
+    - { name: "cast", className: "Oro\\ORM\\Query\\AST\\Functions\\Cast", type: "numeric" }
+  dql: "SELECT CAST(1 as string) FROM Oro\\Entities\\Foo f WHERE f.id = 1"
+  sql: "SELECT REPLACE(REPLACE(1, 1, 'true'), 0, 'false') AS sclr0 FROM test_foo t0_ WHERE t0_.id = 1"
+  expectedResult:
+      - 'true'
+
+- functions:
+    - { name: "cast", className: "Oro\\ORM\\Query\\AST\\Functions\\Cast", type: "numeric" }
+  dql: "SELECT CAST(0 as string) FROM Oro\\Entities\\Foo f WHERE f.id = 1"
+  sql: "SELECT REPLACE(REPLACE(0, 1, 'true'), 0, 'false') AS sclr0 FROM test_foo t0_ WHERE t0_.id = 1"
+  expectedResult:
+      - 'false'
